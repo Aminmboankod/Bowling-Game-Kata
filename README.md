@@ -2,7 +2,9 @@
 ------
 ![](/doc/images/bowling-image.jpg)
 ## Introduction
-----
+
+The following project is a classic challenge proposed in class that consists of creating a program (in this case in python) that tries to add the points obtained by all the frames of a game of bowling.
+
 Here is a sample score table of a bowling player:
 
 | Frame | 1st | 2nd | 3rd | 4th | 5th | 6th | 7th | 8th | 9th | 10th |
