@@ -1,33 +1,59 @@
 
 class Game:
-    
-    
+
+    def __init__(self):
+        self.score = 0
+
+        
+    def strike(self):
+        self.score += 10 + self.bonus()
+
+    def spare(self):
+        self.score += 10 + self.bonus()
+
     @staticmethod
-    def strike(card):
+    def noPins():
+        return 0
+
+    def launch(self, card):
+        self.score += int(card)
+
+    def bonus(self, frameScore):
+        specialBonus = 0
+        for frame in frameScore:
+            specialBonus += self.scoreFrame(frame)
+        return specialBonus
+
+    @staticmethod
+    def scoreFrame(frame):
+        if frame == "X":
+            return 10
+        if frame == "/":
+            return 10
+        if frame == "-":
+            return 0
+        if frame.isdigit():
+            return int(frame)
+
+        
+
+    def totalScore(self, card):
+        index = -1
         for roll in card:
+            index += 1
+
             if roll == "X":
-                return 10
-
-    @staticmethod
-    def spare(card, next_roll):
-        for roll in card:
+                if index == 9:
+                    self.score
+                else:
+                    nextframes = (card[index+1:index+3])
+                    self.score += self.scoreFrame(roll) + self.bonus(nextframes)
             if roll == "/":
-                return 10+(next_roll)
-
-    @staticmethod
-    def noPins(card):
-        for roll in card:
+                    self.score -= int(card[index-1])
+                    nextframe = (card[index+1])
+                    self.score += self.scoreFrame(roll) + self.bonus(nextframe)
             if roll == "-":
-                return 0
-
-    @staticmethod
-    def Launch(card):
-        score = 0
-        for roll in card:
-            score += int(roll)
-        return score
-
-
-game = Game()
-throw = Game()
-next_roll = Game()
+                continue
+            if roll.isdigit():
+                self.score += int(roll)           
+        return self.score
