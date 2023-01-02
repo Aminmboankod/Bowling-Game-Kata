@@ -8,8 +8,8 @@ def strike():
 
 pytest.mark.spare
 def spare():
-    next_frame = 1
-    assert 10+(next_frame)== Game.spare("/")
+    next_roll = 1
+    assert 10+(next_roll)== Game.spare("/", next_roll)
 
 pytest.mark.noPins
 def noPins():

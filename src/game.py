@@ -1,14 +1,17 @@
-import card
+
 class Game:
     
-    def __init__(self, card):
-        self.card = card
-
-    def strike():
-        pass
     
-    def spare():
-        pass
+
+    def strike(card):
+        for roll in card:
+            if roll == "X":
+                return 10
+    
+    def spare(card, next_roll):
+        for roll in card:
+            if roll == "/":
+                return 10+(next_roll)
 
     def noPins():
         pass
