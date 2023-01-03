@@ -27,3 +27,8 @@ def test_Launch(score):
     assert 6 == score.totalScore("51")
     score.score = 0
     assert 60 == score.totalScore("12345123451234512345")
+
+@pytest.mark.completeMatch
+def test_completeMatch(score):
+    #assert 122 == score.totalScore("81-92/X637-52X-62/X")
+    assert 127 == score.totalScore("9/9-9/9-12X9/9---XX-")

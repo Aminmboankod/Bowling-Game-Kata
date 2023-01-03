@@ -20,9 +20,13 @@ class Game:
 
     def bonus(self, frameScore):
         specialBonus = 0
-        for frame in frameScore:
-            specialBonus += self.scoreFrame(frame)
-        return specialBonus
+        if len(frameScore) > 1:
+            return self.totalScore(frameScore)
+        else:
+            for frame in frameScore:
+                specialBonus += self.scoreFrame(frame)
+
+            return specialBonus
 
     @staticmethod
     def scoreFrame(frame):
@@ -40,8 +44,12 @@ class Game:
     def totalScore(self, card):
         index = -1
         lastRoll = 0
+        lastFrame = card[-1]
         if card[-2] == "/":
-                self.score -= int(card[-1])
+            if card[-2].isdigit():
+                self.score -= int(lastFrame)
+            else:
+                self.score -= self.scoreFrame(lastFrame)
         for roll in card:
             index += 1
             if roll == "X":
