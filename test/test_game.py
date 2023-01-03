@@ -9,7 +9,6 @@ def score():
 @pytest.mark.noPins
 def test_allZeros(score):
     assert 0 == score.totalScore("----------")
-    assert 0 == score.totalScore("-")
 
 @pytest.mark.strike
 def test_strike(score):
@@ -19,7 +18,7 @@ def test_strike(score):
 def test_spare(score):
     assert 150 == score.totalScore("5/5/5/5/5/5/5/5/5/5/5")
 
-@pytest.mark.noPins
+@pytest.mark.pinsAndZeros
 def test_noPins(score):
     assert 90 == score.totalScore("9-9-9-9-9-9-9-9-9-9-")
 

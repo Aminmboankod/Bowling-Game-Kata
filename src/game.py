@@ -39,21 +39,22 @@ class Game:
 
     def totalScore(self, card):
         index = -1
+        lastRoll = 0
+        if card[-2] == "/":
+                self.score -= int(card[-1])
         for roll in card:
             index += 1
-
             if roll == "X":
                 if index == 9:
                     self.score
                 else:
-                    nextframes = (card[index+1:index+3])
-                    self.score += self.scoreFrame(roll) + self.bonus(nextframes)
+                    self.score += self.scoreFrame(roll) + self.bonus((card[index+1:index+3]))
             if roll == "/":
-                    self.score -= int(card[index-1])
-                    nextframe = (card[index+1])
-                    self.score += self.scoreFrame(roll) + self.bonus(nextframe)
+                self.score += self.scoreFrame(roll) + self.bonus((card[index+1]))-lastRoll
             if roll == "-":
                 continue
             if roll.isdigit():
-                self.score += int(roll)           
+                self.score += int(roll)
+                lastRoll = int(roll)
+                       
         return self.score
