@@ -1,9 +1,10 @@
 
 class Game:
 
-    def __init__(self):
+    def __init__(self, card):
         self.bonus = 0
-        self.score = 0 
+        self.score = 0
+        self.card = card
 
     # Comprueba tirada devuelve True si es strike
     @staticmethod
@@ -39,21 +40,37 @@ class Game:
             return 0
         else:
             return int(roll)
+    
+    def lastBonus(self):
+        if self.card[-3] == "X":
+            return True
+            
+        if self.card[-2] == "/":
+            return True
+
+    def bonusMatch(self):
+        if self.card[-3] == "X":
+            self.card = self.card[:-3]
+            self.bonus += ((self.scoreFrame(self.card[-1])) + (self.scoreFrame(self.card[-2])) + (self.scoreFrame(self.card[-3])))
+            return self.bonus
+
+        if self.card[-2 == "/"]:
+            self.card = self.card[:-2]
+            self.bonus += ((self.scoreFrame(self.card[-1]))+(self.scoreFrame(self.card[-2])))
+            return self.bonus
 
 
-    def totalScore(self, card):
-        index = -1
-        for roll in card:
-            index += 1
-            previousRoll = card[card.find(roll)-1]
-            nextRoll = card[card.find(roll)+1]
-            nextOf_nextRoll = card[card.find(roll)+2]   
-            if roll == "/":
-                self.score += ((self.scoreFrame(nextRoll)) - (self.scoreFrame(previousRoll)))
+
+
+    def totalScore(self):
+        if self.lastBonus() == True:
+            self.score += self.bonusMatch()
+        for roll in self.card:
+            if roll == "/": 
+                self.score += ((self.scoreFrame(self.card[self.card.find(roll)+1])) - (self.scoreFrame(self.card[self.card.find(roll)-1])))
             if roll == "X":
-                if index == 9:
-                    self.score -= (((self.scoreFrame(nextRoll)) + (self.scoreFrame(nextOf_nextRoll))) * 3)
-                self.score += (self.scoreFrame(nextRoll)) + (self.scoreFrame(nextOf_nextRoll))
+                self.score += (self.scoreFrame(self.card[self.card.find(roll)+1])) + (self.scoreFrame(self.card[self.card.find(roll)+2]))
             self.score += self.scoreFrame(roll)
+            
         return self.score
 
