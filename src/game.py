@@ -38,7 +38,7 @@ class Game:
             return 10
         if self.noPins(roll) == True:
             return 0
-        else:
+        if self.launch(roll) == True:
             return int(roll)
     
     def lastBonus(self):
@@ -50,27 +50,38 @@ class Game:
 
     def bonusMatch(self):
         if self.card[-3] == "X":
+            self.bonus += (self.scoreFrame(self.card[-1])) + (self.scoreFrame(self.card[-2])) + (self.scoreFrame(self.card[-3]))
             self.card = self.card[:-3]
-            self.bonus += ((self.scoreFrame(self.card[-1])) + (self.scoreFrame(self.card[-2])) + (self.scoreFrame(self.card[-3])))
             return self.bonus
 
-        if self.card[-2 == "/"]:
+        if self.card[-2] == "/":
+            self.bonus += ((self.scoreFrame(self.card[-1]))+10)
+            self.bonus -= self.scoreFrame(self.card[-3])
             self.card = self.card[:-2]
-            self.bonus += ((self.scoreFrame(self.card[-1]))+(self.scoreFrame(self.card[-2])))
             return self.bonus
-
-
-
 
     def totalScore(self):
+        
         if self.lastBonus() == True:
             self.score += self.bonusMatch()
+        index = -1
         for roll in self.card:
+            index += 1
             if roll == "/": 
-                self.score += ((self.scoreFrame(self.card[self.card.find(roll)+1])) - (self.scoreFrame(self.card[self.card.find(roll)-1])))
+                self.score -= self.scoreFrame(self.card[index-1])
+                self.score += self.scoreFrame(roll)
+                self.score += self.scoreFrame(self.card[index+1])
+                continue
             if roll == "X":
-                self.score += (self.scoreFrame(self.card[self.card.find(roll)+1])) + (self.scoreFrame(self.card[self.card.find(roll)+2]))
-            self.score += self.scoreFrame(roll)
-            
+                try:
+                    self.score += (self.scoreFrame(self.card[index+2]) + self.scoreFrame(self.card[index+1]))
+                    self.score += self.scoreFrame(roll)
+                except IndexError:
+                    self.score += 0
+                finally:
+                    continue
+                continue
+            if roll.isdigit():
+                self.score += self.scoreFrame(roll)
         return self.score
 
