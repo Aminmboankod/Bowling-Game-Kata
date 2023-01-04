@@ -16,7 +16,7 @@ def test_strike(score):
 
 @pytest.mark.spare
 def test_spare(score):
-    assert 150 == score.totalScore("5/5/5/5/5/5/5/5/5/5/5")
+    assert 150 == score.totalScore("5/5/5/5/5/5/5/5/5/5/")
 
 @pytest.mark.pinsAndZeros
 def test_noPins(score):
@@ -36,3 +36,31 @@ def test_completeMatch(score):
     assert 88 == score.totalScore("-----4-7-7818/6/8/81")
     assert 67 == score.totalScore("9-13315-817--38-9-18")
     assert 95 == score.totalScore("-814179/5/-/1--/7/5-")
+
+
+
+'''
+    index = -1
+    lastRoll = 0
+    lastFrame = card[-1]
+    if card[-2] == "/":
+        if card[-2].isdigit():
+            self.score -= int(lastFrame)
+        else:
+            self.score -= self.scoreFrame(lastFrame)
+    for roll in card:
+        index += 1
+        if roll == "X":
+            if index == 9:
+                self.score
+            else:
+                self.score += self.scoreFrame(roll) + self.bonus((card[index+1:index+3]))
+        if roll == "/":
+            self.score += self.scoreFrame(roll) + self.bonus((card[index+1]))-lastRoll
+        if roll == "-":
+            continue
+        if roll.isdigit():
+            self.score += int(roll)
+            lastRoll = int(roll)
+                    
+    return self.score'''

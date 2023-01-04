@@ -2,64 +2,58 @@
 class Game:
 
     def __init__(self):
-        self.score = 0
+        self.bonus = 0
+        self.score = 0 
 
+    # Comprueba tirada devuelve True si es strike
+    @staticmethod
+    def strike(roll):
+        if roll == "X":
+            return True
+
+    # Comprueba tirada devuelve True si es spare
+    @staticmethod
+    def spare(roll):
+        if roll == "/":
+            return True
+
+    # Comprueba tirada devuelve True si no se ha tirado ningún bolo 
+    @staticmethod
+    def noPins(roll):
+        if roll == "-":
+            return True
+
+    # Comprueba tirada devuelve True si es una tirada sin bonus
+    @staticmethod
+    def launch(roll):
+        if roll.isdigit():
+            return True
         
-    def strike(self):
-        self.score += 10 + self.bonus()
-
-    def spare(self):
-        self.score += 10 + self.bonus()
-
-    @staticmethod
-    def noPins():
-        return 0
-
-    def launch(self, card):
-        self.score += int(card)
-
-    def bonus(self, frameScore):
-        specialBonus = 0
-        for frame in frameScore:
-            specialBonus += self.scoreFrame(frame)
-            
-        return specialBonus
-
-    @staticmethod
-    def scoreFrame(frame):
-        if frame == "X":
+    # Creamos método que asigna puntuación en función del tipo de tirada
+    def scoreFrame(self, roll):
+        if self.strike(roll) == True:
             return 10
-        if frame == "/":
+        if self.spare(roll) == True:
             return 10
-        if frame == "-":
+        if self.noPins(roll) == True:
             return 0
-        if frame.isdigit():
-            return int(frame)
+        else:
+            return int(roll)
 
-        
 
     def totalScore(self, card):
         index = -1
-        lastRoll = 0
-        lastFrame = card[-1]
-        if card[-2] == "/":
-            if card[-2].isdigit():
-                self.score -= int(lastFrame)
-            else:
-                self.score -= self.scoreFrame(lastFrame)
         for roll in card:
             index += 1
+            previousRoll = card[card.find(roll)-1]
+            nextRoll = card[card.find(roll)+1]
+            nextOf_nextRoll = card[card.find(roll)+2]   
+            if roll == "/":
+                self.score += ((self.scoreFrame(nextRoll)) - (self.scoreFrame(previousRoll)))
             if roll == "X":
                 if index == 9:
-                    self.score
-                else:
-                    self.score += self.scoreFrame(roll) + self.bonus((card[index+1:index+3]))
-            if roll == "/":
-                self.score += self.scoreFrame(roll) + self.bonus((card[index+1]))-lastRoll
-            if roll == "-":
-                continue
-            if roll.isdigit():
-                self.score += int(roll)
-                lastRoll = int(roll)
-                       
+                    self.score -= (((self.scoreFrame(nextRoll)) + (self.scoreFrame(nextOf_nextRoll))) * 3)
+                self.score += (self.scoreFrame(nextRoll)) + (self.scoreFrame(nextOf_nextRoll))
+            self.score += self.scoreFrame(roll)
         return self.score
+
