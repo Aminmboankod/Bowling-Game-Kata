@@ -20,13 +20,10 @@ class Game:
 
     def bonus(self, frameScore):
         specialBonus = 0
-        if len(frameScore) > 1:
-            return self.totalScore(frameScore)
-        else:
-            for frame in frameScore:
-                specialBonus += self.scoreFrame(frame)
-
-            return specialBonus
+        for frame in frameScore:
+            specialBonus += self.scoreFrame(frame)
+            
+        return specialBonus
 
     @staticmethod
     def scoreFrame(frame):
