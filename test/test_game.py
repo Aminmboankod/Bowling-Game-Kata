@@ -29,6 +29,9 @@ def test_Launch():
 @pytest.mark.completeMatch
 def test_completeMatch():
 
+    match = Game("X35357162-/346-X6/7")
+    assert match.totalScore() == 113
+
     match = Game("-----4-7-7818/6/8/81")
     assert match.totalScore() == 88
 
@@ -37,8 +40,6 @@ def test_completeMatch():
 
     match = Game("9/9-9/9-12X9/9---XX-")
     assert match.totalScore() == 127    
-
-    match = Game("X35357162-/346-X6/7")
-    assert match.totalScore() == 113      
+      
 
 
