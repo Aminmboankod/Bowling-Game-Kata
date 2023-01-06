@@ -35,33 +35,29 @@ class Game:
     def totalScore(self):
         for roll in self.card:
             self.index += 1
-            if self.frame == 10:
-                self.scoreRoll(self.card[self.index+1:])
-                break
             if roll.isdigit():
                 self.scoreRoll(roll)
                 self.rolls += 1
                 if self.rolls == 2:
                     self.frame += 1
                     self.rolls = 0
-                continue
             if roll == "-":
                 self.scoreRoll(roll)
                 self.rolls += 1
                 if self.rolls == 2:
                     self.frame += 1
                     self.rolls = 0
-                continue
             if roll == "X":
                 self.scoreRoll(roll)
                 self.scoreBonus(self.card[self.index+1:self.index+3])
                 self.frame += 1
-                continue
             if roll =="/":
                 self.scoreRoll(roll)
                 self.scoreBonus(self.card[self.index+1])
                 self.frame += 1
                 self.rolls = 0
-                continue
+            if self.frame == 9:
+                self.scoreRoll(self.card[self.index+1:])
+                break
         return self.score
 
