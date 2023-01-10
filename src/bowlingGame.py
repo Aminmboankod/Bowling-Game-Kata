@@ -1,7 +1,6 @@
 class Game:
 
     def __init__(self, card):
-        self.bonus = ""
         self.score = 0
         self.frame = 0
         self.rolls = 0
@@ -9,6 +8,8 @@ class Game:
         self.lastRoll = 0
         self.card = card
 
+
+    # Métodos de cálculo de puntuación y bonus
     def scoreRoll(self, card):
         for roll in card:
             if roll.isdigit():
@@ -27,7 +28,6 @@ class Game:
                 self.lastRoll = 0
                 self.score += 10
 
-    
     def scoreBonus(self, bonus):
         for roll in bonus:
             self.scoreRoll(roll)
@@ -36,28 +36,46 @@ class Game:
         for roll in self.card:
             self.index += 1
             if roll.isdigit():
-                self.scoreRoll(roll)
-                self.rolls += 1
-                if self.rolls == 2:
-                    self.frame += 1
-                    self.rolls = 0
+                self.num(roll)
             if roll == "-":
-                self.scoreRoll(roll)
-                self.rolls += 1
-                if self.rolls == 2:
-                    self.frame += 1
-                    self.rolls = 0
+                self.null(roll)
             if roll == "X":
-                self.scoreRoll(roll)
-                self.scoreBonus(self.card[self.index+1:self.index+3])
-                self.frame += 1
+                self.strike(roll)
             if roll =="/":
-                self.scoreRoll(roll)
-                self.scoreBonus(self.card[self.index+1])
-                self.frame += 1
-                self.rolls = 0
+                self.spare(roll)
             if self.frame == 9:
                 self.scoreRoll(self.card[self.index+1:])
                 break
         return self.score
+    
 
+    # launches methods
+    def strike(self, roll):
+        self.scoreRoll(roll)
+        self.scoreBonus(self.card[self.index+1:self.index+3])
+        self.frame += 1 
+
+    def spare(self, roll):
+        self.scoreRoll(roll)
+        self.scoreBonus(self.card[self.index+1])
+        self.setFrame()
+
+    def null(self, roll):
+        self.scoreRoll(roll)
+        self.rolls += 1
+        self.setRoll()
+
+    def num(self, roll):
+        self.scoreRoll(roll)
+        self.rolls += 1
+        self.setRoll()
+
+
+    # set frames and rolls
+    def setFrame(self):
+        self.frame += 1
+        self.rolls = 0
+
+    def setRoll(self):
+        if self.rolls == 2:
+            self.setFrame()        

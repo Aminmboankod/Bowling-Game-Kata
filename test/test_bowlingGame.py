@@ -1,4 +1,4 @@
-from src.game import Game
+from src.bowlingGame import Game
 import pytest
 
 @pytest.mark.noPins
