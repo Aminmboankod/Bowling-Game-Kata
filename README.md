@@ -6,26 +6,21 @@
 
 # Índice
 
-+   [Introducción](#introducción)
-+   [Instrucciones del kata](#instrucciones-del-kata)
-+   [Manual](#manual)
-    +   [Requisitos previos](#requisitos-previos)
-    +   [Instalación](#instalación)
-    +   [Uso](#uso)
-+   [Arquitectura de la aplicación](#arquitectura-de-la-aplicación)
-    +   [Modelo DDD](#modelo-ddd)
-    +   [Diagrama UML](#diagrama-uml)
-    +   [Capa Lógica](#capa-lógica)
-    +   [Capa de acceso a datos](#capa-de-acceso-a-datos)
-+   [Pruebas](#pruebas)
-    +   [Coverage](#coverage)
++   [Introduction](#introduction)
++   [Instructions of kata and DDD](#instructions-of-kata-and-ddd)
++   [Handbook](#handbook)
+    +   [Previous Requerimets](#previous-requirements)
+    +   [Instalation](#instalation)
+    +   [Use](#use)
++   [Domain Drive Design Model](#domain-drive-design-model)
++   [UML diagram](#uml-diagram)
++   [Test](#test)
++   [Coverage](#coverage)
 +   [TDD](#tdd-in-bowling-kata)
 
 
 
-# Introducción
-
-
+# Introduction
 
 The following project is a classic challenge proposed in class that consists of creating a program (in this case in python) that tries to add the points obtained by all the frames of a game of bowling.
 
@@ -46,41 +41,43 @@ A strike is when the player knocks down all 10 pins on his first try.  The bonus
 
 In the tenth frame a player who rolls a spare or strike is allowed to roll the extra balls to complete the frame.  However no more than three balls can be rolled in tenth frame.
 
-# Instrucciones del kata y DDD
+# Instructions of kata and DDD
 
-Create a program, which, given a valid sequence of rolls for one line of American Ten-Pin Bowling,
-produces the total score for the game. This is a summary of the rules of the game:
-- Each game, or “line” of bowling, includes ten turns, or “frames” for the bowler.
-- In each frame, the bowler gets up to two tries to knock down all the pins.
+Create a program, which, given a valid sequence of **rolls** for one line of American Ten-Pin Bowling,
+produces the **total score** for the **game**. This is a summary of the rules of the game:
+- Each **game**, or “line” of bowling, includes ten **turns**, or “**frames**” for the bowler.
+- In each **frame**, the bowler gets up to **two tries** to knock down all the **pins**.
 
-- If in two tries, he fails to knock them all down, his score for that frame is the total number of pins
+- If in two tries, he fails to knock them all down, his **score** for that frame is the total number of pins
 knocked down in his two tries.
-- If in two tries he knocks them all down, this is called a “spare” and his score for the frame is ten
+- If in two tries he knocks them all down, this is called a “**spare**” and his score for the frame is ten
 plus the number of pins knocked down on his next throw (in his next turn).
-- If on his first try in the frame he knocks down all the pins, this is called a “strike”. His turn is over,
+- If on his first try in the frame he knocks down all the **pins**, this is called a “**strike**”. His turn is over,
 and his score for the frame is ten plus the simple total of the pins knocked down in his next two
-rolls.
+**rolls**.
 - If he gets a spare or strike in the last (tenth) frame, the bowler gets to throw one or two more
-bonus balls, respectively. - These bonus throws are taken as part of the same turn. If the bonus
+**bonus balls**, respectively. - These bonus throws are taken as part of the same turn. If the bonus
 throws knock down all the pins, the process does not repeat: the bonus throws are only used to
 calculate the score of the final frame.
-- The game score is the total of all frame scores.
+- **The game score is the total of all frame scores.**
 
+All the words in bold are those annotated to apply DDD as ubiquitous language.
 
-# Manual
+# Handbook
 
-## Requisitos previos
+## Previous requirements
 | Paquete | Versión |
 |:----:|:----:|
-|attrs | 22.2.0
-| exceptiongroup | 1.1.0 
+|attrs | 22.2.0 |
+| coverage | 7.0.1 |
+| exceptiongroup | 1.1.0 | 
 | iniconfig | 1.1.1 |
 | packaging | 22.0 | 
 | pluggy | 1.0.0 |
 | pytest | 7.2.0 |
 | tomli | 2.0.1
 
-## Instalación
+## Instalation
 
 Crea el directorio donde vas a clonar el repositorio  y clonalo usando el siguiente comando:
 ```
@@ -92,41 +89,24 @@ Ejecuta el archivo de configuración:
 ```
 $ ./setup.sh
 ```
-## Uso
+## Use
+
+You can pass various scorecards from any bowling game in **string** format and by running **game.getTotal()** it calculates the final score taking all cases into account.
 
 
-
-## Arquitectura de la aplicación
+## Domain Drive Design model
 ---
-![Arquitectura aplicacion]()
-### Diseño de componentes:
-![Diseño de componentes]()
+![DDD Model](/doc/images/BowlingGame-DDD.drawio.png)
 
-## Modelo DDD
+We have a **bowling game** that has a **score card**  which has a **total score**, and we can find information about the **rolls**, such as if it is **strike**, **spare**, **double strike**.
+
+
+## UML Diagram
 ---
-![Modelo DDD]()
-Tenemos un **DNI** que necesita de una tabla de asignación para establecer correctamente un **digito control** para asociarlo al **número de identificación fiscal (NIF)**. 
-
-El **DNI** va a contener el **NIF**, el **Digito control** y otros datos personales del propietario.
-Ejemplo: 45301872Z
-| NIF | D. Control |
-|----|----|
-45301872 | Z
-
-## Diagrama UML
----
-![Diagrama UML]()
-
-## Capa Lógica
----
+![UML Diagram](/doc/images/BowlingGame-UML.drawio.png)
 
 
-
-## Capa de acceso a datos
----
-
-
-## Pruebas
+## Test
 ---
 
 ## Coverage
