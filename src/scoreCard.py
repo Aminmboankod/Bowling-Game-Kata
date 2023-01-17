@@ -65,7 +65,7 @@ class ScoreCard:
 
     def calculateScore(self):
         for i in range(len(self.getScoreCard())):
-            pin = self.getScoreCard([i])
+            pin = self.scoreCard[i]
             self.roll(pin)
         
     def roll(self, pins):
@@ -79,12 +79,12 @@ class ScoreCard:
             elif self.isStrike() and not self.isLastFrame():
                 self.setDouble(True)
                 
-            self.setTotalScore(self.getTotalScore() + self.getSymbolValue(pins))
+            self.setTotalScore(self.getTotalScore() + self.getLaunchesValue(pins))
             self.setStrike(True)
             self.setFirstRoll(True)
 
         elif self.isFirstRoll():
-            self.setFirstRollPins(self.getSymbolValue(pins))
+            self.setFirstRollPins(self.getLaunchesValue(pins))
             self.setFirstRoll(False)
 			
             if self.isStrike() and not self.isExtraRoll():
