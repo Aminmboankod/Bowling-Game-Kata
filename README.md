@@ -105,6 +105,31 @@ $ ./setup.sh
 To develop test-driven is to round in a simple cycle:  
 1. [![Generic badge](https://img.shields.io/badge/⎍-Test-red.svg)](https://shields.io/)  
 
+```
+@pytest.mark.noPins
+def test_allZeros():
+    match = Game("----------")
+    assert match.totalScore() == 0
+```
 2. [![Generic badge](https://img.shields.io/badge/⎍-Code-brightgreen.svg)](https://shields.io/)  
 
+```
+class Game:
+
+    def __init__(self, card:
+        self.card = card
+        self.score = 0
+
+    def totalScore(self):
+        for roll in self.card:
+            if roll == "-":
+                self.score += 0
+        return self.score
+```
+
 3. [![Generic badge](https://img.shields.io/badge/⎍-Refactor-blue.svg)](https://shields.io/)
+
+```
+In this case, no more features have been implemented yet and the code is quite simple, but as features are added, the need arises to refactor and simplify the responsibilities of each method.
+
+```
