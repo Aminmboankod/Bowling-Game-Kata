@@ -4,26 +4,21 @@
 ![Bowling](/doc/images/bowling-image.jpg)
 
 
-# Índice
+# Index
 
-+   [Introducción](#introducción)
-+   [Instrucciones del kata](#instrucciones-del-kata)
++   [Introduction](#introduction)
++   [DDD Information](#ddd-information)
++   [Rules](#rules)
 +   [Manual](#manual)
-    +   [Requisitos previos](#requisitos-previos)
-    +   [Instalación](#instalación)
-    +   [Uso](#uso)
-+   [Arquitectura de la aplicación](#arquitectura-de-la-aplicación)
-    +   [Modelo DDD](#modelo-ddd)
-    +   [Diagrama UML](#diagrama-uml)
-    +   [Capa Lógica](#capa-lógica)
-    +   [Capa de acceso a datos](#capa-de-acceso-a-datos)
-+   [Pruebas](#pruebas)
-    +   [Coverage](#coverage)
+    +   [Requierements](#requierements)
+    +   [Instalation](#instalation)
++   [DDD Model](#ddd-model)
++   [UML Diagram](#uml-diagram)
 +   [TDD](#tdd-in-bowling-kata)
 
 
 
-# Introducción
+# Introduction
 
 
 
@@ -36,17 +31,8 @@ Here is a sample score table of a bowling player:
 | Rolls | 1 &nbsp;&nbsp; 4 | 4 &nbsp;&nbsp; / | 6 &nbsp;&nbsp; / | 5 &nbsp;&nbsp; / | ✕ | 0 &nbsp;&nbsp; 1 | 7 &nbsp;&nbsp; / | 6 &nbsp;&nbsp; / | ✕ | 2 &nbsp;&nbsp; / &nbsp;&nbsp; 6 |
 |Score| 5 | 14 | 29 | 49 | 60 | 61 | 77 | 97 | 117 | **133** |
 
-## Rules:
 
-The game consists of 10 frames as shown above.  In each frame the player has two opportunities to knock down 10 pins.  The score for the frame is the total number of pins knocked down, plus bonuses for strikes and spares.
-
-A spare is when the player knocks down all 10 pins in two tries.  The bonus for that frame is the number of pins knocked down by the next roll.  So in frame 3 above, the score is 10 (the total number knocked down) plus a bonus of 5 (the number of pins knocked down on the next roll.)
-
-A strike is when the player knocks down all 10 pins on his first try.  The bonus for that frame is the value of the next two balls rolled.
-
-In the tenth frame a player who rolls a spare or strike is allowed to roll the extra balls to complete the frame.  However no more than three balls can be rolled in tenth frame.
-
-# Instrucciones del kata y DDD
+# DDD Information
 
 Create a program, which, given a valid sequence of rolls for one line of American Ten-Pin Bowling,
 produces the total score for the game. This is a summary of the rules of the game:
@@ -66,10 +52,19 @@ throws knock down all the pins, the process does not repeat: the bonus throws ar
 calculate the score of the final frame.
 - The game score is the total of all frame scores.
 
+## Rules:
+
+The game consists of 10 frames as shown above.  In each frame the player has two opportunities to knock down 10 pins.  The score for the frame is the total number of pins knocked down, plus bonuses for strikes and spares.
+
+A spare is when the player knocks down all 10 pins in two tries.  The bonus for that frame is the number of pins knocked down by the next roll.  So in frame 3 above, the score is 10 (the total number knocked down) plus a bonus of 5 (the number of pins knocked down on the next roll.)
+
+A strike is when the player knocks down all 10 pins on his first try.  The bonus for that frame is the value of the next two balls rolled.
+
+In the tenth frame a player who rolls a spare or strike is allowed to roll the extra balls to complete the frame.  However no more than three balls can be rolled in tenth frame.
 
 # Manual
 
-## Requisitos previos
+## Requierements
 | Paquete | Versión |
 |:----:|:----:|
 |attrs | 22.2.0
@@ -80,7 +75,7 @@ calculate the score of the final frame.
 | pytest | 7.2.0 |
 | tomli | 2.0.1
 
-## Instalación
+## Instalation
 
 Crea el directorio donde vas a clonar el repositorio  y clonalo usando el siguiente comando:
 ```
@@ -92,45 +87,16 @@ Ejecuta el archivo de configuración:
 ```
 $ ./setup.sh
 ```
-## Uso
 
 
-
-## Arquitectura de la aplicación
+## DDD Model
 ---
-![Arquitectura aplicacion]()
-### Diseño de componentes:
-![Diseño de componentes]()
+![Modelo DDD](/doc/images/BowlingGame-DDD.drawio.png)
 
-## Modelo DDD
+
+## UML Diagram
 ---
-![Modelo DDD]()
-Tenemos un **DNI** que necesita de una tabla de asignación para establecer correctamente un **digito control** para asociarlo al **número de identificación fiscal (NIF)**. 
-
-El **DNI** va a contener el **NIF**, el **Digito control** y otros datos personales del propietario.
-Ejemplo: 45301872Z
-| NIF | D. Control |
-|----|----|
-45301872 | Z
-
-## Diagrama UML
----
-![Diagrama UML]()
-
-## Capa Lógica
----
-
-
-
-## Capa de acceso a datos
----
-
-
-## Pruebas
----
-
-## Coverage
----
+![Diagrama UML](/doc/images/BowlingGame-UML.drawio.png)
 
 
 
